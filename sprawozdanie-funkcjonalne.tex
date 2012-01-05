@@ -1,0 +1,118 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[a4paper]{geometry}
+
+\usepackage{polski}
+\usepackage{xltxtra}
+\usepackage{indentfirst}
+\usepackage{relsize}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+\hypersetup{
+    pdftitle={},%
+    pdfauthor={},%
+    colorlinks=true,        % false: boxed links; true: colored links
+    linkcolor=black,        % color of internal links
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan,          % color of external links
+    unicode=true,           % non-Latin characters in Acrobat’s bookmarks
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdfnewwindow=true       % links in new window
+}
+
+%% tweak fonts
+\defaultfontfeatures{Mapping=tex-text}
+\setromanfont{Charis SIL}
+%%\setsansfont[Scale=MatchLowercase]{Helvetica Neue}
+%%\setmonofont[Scale=MatchLowercase]{Menlo}
+%%\linespread{1.25}
+
+%% define custom commands and environments
+\DefineVerbatimEnvironment%
+  {SmallVerbatim}%
+  {Verbatim}{fontsize=\relsize{-0.5},numbers=left,numbersep=-10pt,frame=lines,tabsize=4}
+
+\newcommand{\f}[1]{\texttt{#1}}
+\newcommand{\s}[1]{\textsf{#1}}
+
+\begin{document}
+
+\title{Specyfikacja funckjonalna\\
+  Projekt grupowy z przedmiotu AiSD
+}
+\author{
+  Tomasz Cudziło\\
+  Mateusz Malicki\\
+  Mateusz Ochtera\\
+  \textsc{PW EE Informatyka}\\[10pt]
+}
+\date{\today}
+\maketitle
+
+
+
+\section{Opis projektu}
+
+Zadanie polega na zaimplementowaniu algorytmu genetycznego służącego do
+optymalizacji wnętrza środka komunikacji miejskiej oraz wizualizację wyników.
+
+
+\subsection{Wejście}
+Użytkownik podaje:
+\begin{itemize}
+  \item maksymalny koszt produkcji autobusu,
+  \item ustalona szerokość autobusu,
+  \item maksymalny długość autobusu,
+  \item minimalną ilość miejsc w autobusie (dowolnie siedzących lub stojących),
+  \item minimalna ilość wejść (wejścia są rozmieszczane automatycznie i
+    równomiernie).
+\end{itemize}
+Opcjonalnie, możliwe będzie również podanie maksymalnej wielkości populacji oraz
+maksymalną ilość generacji.
+
+
+\subsection{Wyjście}
+Bitmapa z wizualizacją wnętrza autobusu, oraz wypisanymi statystykami tj.:
+liczba miejsc siedzących, liczba miejsc stojących, szerokość i długość autobusu
+oraz koszt produkcji.
+
+
+
+\section{Opis działania programu}
+
+
+\subsection{Funkcja przystosowania}
+Brane pod uwagę są następujące czynniki:
+\begin{itemize}
+    \item pojemność autobusu --- maksymalna, niezależna od komfortu pasażerów,
+    \item odległość wyjść od miejsc,
+    \item koszt produkcji autobusu,
+    \item zagęszczenie miejsc stojących --- pasażerowie, o ile to możliwe,
+      preferują być oddaleni od współpasażerów o minimum 50 cm.
+\end{itemize}
+
+
+\subsection{Selekcja}
+\emph{Metoda turniejowa} --- populację dzielimy na szereg dowolnie licznych
+grup. Następnie, z każdej z nich, wybrany zostanie osobnik o najlepszym
+przystosowaniu.
+
+
+\subsection{Reprezentacja} 
+
+
+\subsection{Krzyżowanie}
+Wymiary potomstwa będą średnią wymiarów rodziców, podobnie ilość miejsc.
+Następnie losujemy kolejne miejsca przy czym te które się powtórzyły u obydwojga
+rodziców mają siłą rzeczy dwa razy większą szanse na znalezienie się u
+potomstwa.
+
+\subsection{Współczynnik mutacji}
+Moim zdaniem chodziło mu o opisanie rodzaju mutacji. Czyli np. będziemy
+wprowadzać niewielkie odchylenia w losowych osobnikach. Zczytać aktualny
+rozmiar i ilości miejsc i odpowiednio troszeczkę je zmodyfikować w jedną bądź
+drugą stroną.  A współczynnik powinien być stosunkowo niewielki żeby nie
+stworzyć armii mutantów u których pozanikają cechy rodziców. Mateusz O. 
+
+
+\end{document}
